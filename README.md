@@ -4,7 +4,7 @@ This example shows how to deploy [a sample Redis app - `tombuildsstuff/builder-a
 
 The application is a small demo that reads from and writes to Redis - it stores a value in the cache and serves it back over HTTP. It's a plain [12-factor](https://12factor.net) service: one image, configured entirely through environment variables. The image is built and published from [the application repository](https://github.com/tombuildsstuff/builder-app); this repository is just the infrastructure that runs it.
 
-The app authenticates to Redis with the cache's **access key**, passed to the container as a secure environment variable (there's no managed-identity data path on a Basic cache). It connects over TLS, reading the cache host and SSL port from `REDIS_HOST` and `REDIS_PORT`. On Azure the SSL port is always 6380; on Locally the cache is served on a dynamically-allocated port, which is why the app reads it rather than assuming 6380.
+The app authenticates to Redis with the cache's **access key**, passed to the container as a secure environment variable - that's what the `builder-app` image is written to use. (Azure Cache for Redis also supports Microsoft Entra authentication, via access-policy assignments, on every tier; Locally implements that path too. This example just uses the access key.) It connects over TLS, reading the cache host and SSL port from `REDIS_HOST` and `REDIS_PORT`. On Azure the SSL port is always 6380; on Locally the cache is served on a dynamically-allocated port, which is why the app reads it rather than assuming 6380.
 
 ## Requirements
 
