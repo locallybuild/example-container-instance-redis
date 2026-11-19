@@ -25,5 +25,5 @@ variable "container_image" {
     tombuildsstuff/builder-app.
   EOT
   type        = string
-  default     = "docker.io/tombuildsstuff/builder-app:latest"
+  default     = "docker.io/tombuildsstuff/builder-app:1.0.0"
 }
